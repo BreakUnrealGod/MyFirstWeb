@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书商城</title>
+</head>
+<body>
+    <p><a href="{% url 'index' %}">返回首页</a></p>
+   {% for book in books %}
+            <div style='height:300px;width:80%;background:palegoldenrod;border:3px solid black;margin-top:30px;margin-left:10%'>
+                <div>
+                    <img src="/media/{{ book.bookcover }}" alt="" style='height:200px;width:180px'>
+                    <a style='font-size:20px' href="">收藏</a>
+                    <a style='font-size:20px' href="">赠送</a>
+                    <a style='font-size:20px' href="">加入购物车</a>
+                </div>
+                <div>
+                    <span>作者：{{ book.bookauthor }}</span>
+                </div>
+
+                <div>
+                    <span>简介：</span><br>
+                    <span>{{ book.bookcontent }}</span>
+                </div>
+            </div>
+    {% endfor %}
+
+{#分页#}
+{#{% for contact in contacts %}#}
+    {# Each "contact" is a Contact model object. #}
+{#    {{ contact.full_name|upper }}<br />#}
+{#    ...#}
+{#{% endfor %}#}
+{##}
+{#<div class="pagination">#}
+{#    <span class="step-links">#}
+{#        {% if contacts.has_previous %}#}
+{#            <a href="?page={{ contacts.previous_page_number }}">previous</a>#}
+{#        {% endif %}#}
+{##}
+{#        <span class="current">#}
+{#            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.#}
+{#        </span>#}
+{##}
+{#        {% if contacts.has_next %}#}
+{#            <a href="?page={{ contacts.next_page_number }}">next</a>#}
+{#        {% endif %}#}
+{#    </span>#}
+{#</div>#}
+
+{#<nav aria-label="Page navigation">#}
+{#    <ul class="pagination">#}
+{#        {% if books.has_previous %}#}
+{#            <li>#}
+{#                <a href="?page={{ books.previous_page_number }}" aria-label="Previous">#}
+{#                    <span aria-hidden="true">&laquo;</span>#}
+{#                </a>#}
+{#            </li>#}
+{#        {% endif %}#}
+{##}
+{#        {% for pg in books.paginator.page_range %}#}
+{#            {% if books.number == pg %}#}
+{#                <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>#}
+{#            {% else %}#}
+{#                <li><a href="?page={{ pg }}">{{ pg }}</a></li>#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{##}
+{#        {% if books.has_next %}#}
+{#            <li>#}
+{#                <a href="?page={{ books.next_page_number }}" aria-label="Next">#}
+{#                    <span aria-hidden="true">&raquo;</span>#}
+{#                </a>#}
+{#            </li>#}
+{#        {% endif %}#}
+{#    </ul>#}
+{#</nav>#}
+{##}
+{##}
+{#</body>#}
+{#</html>#}

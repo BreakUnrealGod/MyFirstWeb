@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收藏及购物车</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<p><a href="{% url 'index' %}">返回首页</a></p>
+{% for book in books %}
+    <div style="height: 300px;width: 80%;margin-bottom:30px;margin-left:10%;border:3px solid #101010">
+        <img src="/media/{{ book.bookcover }}" alt="" style='height:200px;width:180px'><br>
+        <span id="bookname">书名：{{ book.bookname }}</span><br>
+        <span>作者：{{ book.bookauthor }}</span>
+    <div style="float: right">
+        <span style="visibility: hidden">{{ book.bookname }}</span>
+        <button id="collection">收藏</button>
+        <button id="shoppingcar">加入购物车</button>
+        <span style="visibility: hidden">{{ book.id }}</span>
+    </div>
+    </div>
+{% endfor %}
+
+<script>
+        $(function () {
+        $('#collection').click(function () {
+            var $btn = $(this);
+            var $span = $btn.prev();
+            var bookname = $span.html();
+            {#// flask  {{ url_for('')}}#}
+            $.getJSON('{% url 'book:bookcollection' %}', {bookname: bookname}, function (data) {
+                if (data.status == 201) {
+                    $btn.html('已收藏')
+                }
+                if (data.status == 200) {
+                    $btn.html('收藏')
+                }
+            })
+        });
+    });
+</script>
+
+{#<script>#}
+{#        $(function () {#}
+{#        $('#shoppingcar').click(function () {#}
+{#            var $btn = $(this);#}
+{#            var $span = $btn.next();#}
+{#            var bookid = $span.html();#}
+            {#// flask  {{ url_for('')}}#}
+{#            $.getJSON('{% url 'book:bookshoppingcar' %}', {bookid: bookid}, function (data) {#}
+{#                if (data.status == 201) {#}
+{#                    $btn.html('已加入购物车')#}
+{#                }#}
+{#                if (data.status == 200) {#}
+{#                    $btn.html('加入购物车')#}
+{#                }#}
+{#            })#}
+{#        });#}
+{#    });#}
+{#</script>#}
+
+
+
+
+</body>
+</html>

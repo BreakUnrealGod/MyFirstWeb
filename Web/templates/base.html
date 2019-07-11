@@ -1,0 +1,171 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>
+        {% block title %}
+        yushu
+        {% endblock %}
+        </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="shortcut icon" href="http://www.yushu.im/static/images/icon.png">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% block mycss %}
+
+    {% endblock %}
+<style>
+    .dorp{
+        position: relative;
+        display: inline-block;
+    }
+    .dorp_con{
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+    }
+    .dorp:hover .dorp_con{display: block}
+</style>
+</head>
+<body>
+<header>
+     <div class="nav-self">
+        <div style="padding-top: inherit" class="container">
+            <form class="form-inline" action="/book/search" method="get">
+                <div class="flex-vertical-center-height">
+                    <div class="col-md-2  col-xs-3 logo">
+                        <img src="{% static 'images/logo-yushu.png' %}">
+                    </div>
+                    <div style="margin-left:20px;" class="col-md-7  col-xs-6 input-group">
+                        <input name="q" type="text" placeholder="ISBN、图书名称" class="form-control input-sm">
+                        <span class="input-group-btn">
+                            <input class="btn btn-search" type="submit" value="搜索">
+                        </span>
+                    </div>
+                    <div class="col-md-3 col-xs-3" style="padding-right: 0">
+                        <div class="container-height flex-vertical-center login-box">
+                                <div style="height: 100%; width: 100%;display: flex; justify-content: flex-end; align-items: center">
+                                    {% if request.session.username %}
+                                        欢迎！<a href="{% url 'user:usercenter' %}">{{ request.session.username }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'user:logout' %}">注销</a>
+                                    {% else %}
+                                        <a class="btn-end" href="{% url 'user:login' %}">登录</a>
+                                        <a class="btn-end" href="{% url 'user:register' %}">注册</a>
+                                    {% endif %}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="sub-nav flex-vertical-center">
+        <div class="container" style="width: 100%">
+            <div class="row">
+
+                <div class="col-md-2 col-xs-3">
+                    <a id="recent" href={% url 'book:bookadd' %} class="flex-vertical-hor-center">
+                        <img src="{% static 'images/upload.png' %}">
+                        <span>上传图书</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="gifts" href="http://www.yushu.im/my/gifts" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/gift.png' %}">
+                        <span>赠送清单</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="wishes" href="http://www.yushu.im/my/wish" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/wish.png' %}">
+                        <span>心愿清单</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="pending" href="http://www.yushu.im/pending" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/fish.png' %}">
+                        <span>鱼漂</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="bookshop" href="{% url 'book:bookshow' %}" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/bookshop.png' %}">
+                        <span>书城</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="bookcollectionshoppingcar" href="{% url 'book:bookcollectionshoppingcar' %}" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/star.jpeg' %}">
+                        <span>收藏</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="bookcollectionshoppingcar" href="{% url 'index' %}" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/car.jpeg' %}">
+                        <span>购物车</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="bookcollectionshoppingcar" href="{% url 'index' %}" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/shujia.jpg' %}">
+                        <span>书架</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="bookcollectionshoppingcar" href="{% url 'index' %}" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/game.jpg' %}">
+                        <span>小游戏</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="bookcollectionshoppingcar" href="{% url 'index' %}" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/jingpai.jpg' %}">
+                        <span>限时竞拍</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="bookcollectionshoppingcar" href="{% url 'index' %}" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/zhuanmai.jpg' %}">
+                        <span>图书转卖</span>
+                    </a>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <a id="bookcollectionshoppingcar" href="{% url 'index' %}" class="flex-vertical-hor-center">
+                        <img src="{% static 'images/pin.jpg' %}">
+                        <span>幸运抽奖</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</article>
+
+<footer>
+    <div id="footer" class="flex-hor-center">
+    <span>© 2017-2020 yushu.im created by 七月</span>
+    </div>
+</footer>
+
+<script src="{% static 'js/jquery-3.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/base.js' %}"></script>
+<script>
+    $SCRIPT_ROOT = "";
+</script>
+{% block myjs %}
+
+{% endblock %}
+</body>
+</html>

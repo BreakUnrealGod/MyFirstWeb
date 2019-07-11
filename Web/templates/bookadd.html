@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传图书</title>
+</head>
+<body>
+<form action="{% url 'book:bookadd' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{{ msg }}</p>
+    <p>封面<input name="bookcover" type="file" ></p>
+{#    <p>书名<input name="bookname" type="text" ></p>#}
+    <p>作者<input name="bookauthor" type="text" ></p>
+    <p>内容<textarea name="bookcontent" cols="50" rows="6"></textarea></p>
+    <p><input type='submit' value="上传"></p>
+    <p><a href="{% url 'index' %}">返回首页</a></p>
+</form>
+</body>
+</html>
